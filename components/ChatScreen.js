@@ -3,13 +3,14 @@ import {useAuthState} from 'react-firebase-hooks/auth'
 import {db, auth} from '../firebase'
 import {useRouter} from 'next/router'
 import {useCollection} from 'react-firebase-hooks/firestore'
-import { Avatar, IconButton } from '@material-ui/core';
-import { AttachFile, InsertEmoticon, MoreVert, Mic} from '@material-ui/icons';
+import { Avatar, Button} from '@material-ui/core';
+import { InsertEmoticon, Mic} from '@material-ui/icons';
 import Message from './Message'
 import { useRef, useState } from 'react'
 import firebase from 'firebase'
 import getRecipientEmail from '../utils/getRecipientEmail'
 import TimeAgo from 'timeago-react'
+import { device } from '../mediaQueries';
 
 
 
@@ -29,6 +30,7 @@ function ChatScreen({chat, messages}) {
         endOfMessagesRef.current.scrollIntoView({
             behavior: "smooth",
             block: "start",
+            
         })
     }
 
@@ -79,18 +81,28 @@ function ChatScreen({chat, messages}) {
     };
     const recipient = recipientSnapshot?.docs?.[0]?.data();
     const recipientEmail = getRecipientEmail(chat.users, user);
+
+    const handleClick = () => {
+        
+        router.push('/')
+      }
     return (
         <Container>
+                <BackButton>
+                         <Button onClick={handleClick}> &rarr; Back Home</Button>
+                 </BackButton>
             <Header>
                 {recipient ? (
-                    <Avatar src={recipient?.photoURL} />
+                    <Avatar className="avatar" src={recipient?.photoURL} />
                 ) : (
-                    <Avatar>{recipientEmail[0]}</Avatar>
+                    <Avatar className="avatar">{recipientEmail[0]}</Avatar>
                 )}
                 <HeaderInformation>
                         <h3>{recipientEmail}</h3>
-                        {recipientSnapshot ? (
-                            <p>Last active: {''}
+                </HeaderInformation>
+                <HeaderLastActive>
+                {recipientSnapshot ? (
+                            <p className="last-active">Last active: {''}
                                 {recipient?.lastSeen.toDate() ? (
                                     <TimeAgo datetime={recipient?.lastSeen?.toDate()} />
                                 ): "unavailable"}
@@ -98,17 +110,8 @@ function ChatScreen({chat, messages}) {
                         ): (
                            <p>Loading last active</p> 
                         )}
-                </HeaderInformation>
-                <HeaderIcon>
-                <IconButton>
-                    <AttachFile />
-                </IconButton>
-
-                <IconButton>
-                     <MoreVert />
-                </IconButton>
                     
-                </HeaderIcon>
+                </HeaderLastActive>
             </Header>
 
             <MessageContainer>
@@ -129,8 +132,12 @@ export default ChatScreen
 
 
 const Container = styled.div`
-    
 `;
+
+const BackButton = styled.div`
+    background-color: whitesmoke;
+`;
+
 
 const Header = styled.div`
     position: static;
@@ -138,23 +145,27 @@ const Header = styled.div`
     z-index: 100;
     top: 0;
     display: flex;
-    position: 11px;
-    height: 80px;
+    height: 75px;
     align-items: center;
     border-bottom: 1px solid whitesmoke;
 `;
 
 
 const HeaderInformation = styled.div`
-    margin-left: 15px;
+    margin-left: 5px;
     flex: 1;
+    align-items: center;
     >h3 {
-        margin-bottom: 3px;
-    }
 
-    >p {
-        font-size: 14px;
-        color: grey;
+        @media ${device.mobileL} { 
+
+            font-size: 12px;
+  }
+
+        @media ${device.mobileS} { 
+
+        font-size: 10px;
+}
     }
 `;
 
@@ -170,7 +181,27 @@ const EndOfMessage = styled.div`
 `;
 
 
-const HeaderIcon = styled.div``;
+const HeaderLastActive = styled.div`
+
+>p {
+        font-size: 13px;
+        color: grey;
+        margin-right: 20px;
+
+        @media ${device.mobileL} { 
+
+            font-size: 10px;
+            margin-right: 3px;
+         }
+
+     @media ${device.mobileS} { 
+
+            font-size: 7px;
+    }
+        
+    }
+
+`;
 
 const Input = styled.input`
     flex: 1;

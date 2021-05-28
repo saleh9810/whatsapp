@@ -9,6 +9,10 @@ import {useCollection} from 'react-firebase-hooks/firestore'
 
 import { auth, db } from '../firebase';
 import Chat from './Chat';
+import { device } from '../mediaQueries';
+
+
+
 
 
 const Sidebar = () => {
@@ -81,8 +85,7 @@ const Container = styled.div`
 flex: 0.45;
     border-right: 1px solid whitesmoke;
     height: 100vh;
-    min-width: 300px;
-    max-width: 350px;
+    width: 100%;
     overflow-y: scroll;
 
     ::-webkit-scrollbar {
@@ -91,6 +94,9 @@ flex: 0.45;
 
     -ms-overflow-style: none;
     scrollbar-width: none;
+
+ 
+
 
 `;
 

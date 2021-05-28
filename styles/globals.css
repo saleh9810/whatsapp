@@ -14,3 +14,16 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+
+.avatar {
+  margin-left: 20px;
+}
+
+
+@media only screen and (max-width:600px) {
+  .avatar {
+    margin-left: 2px;
+  }
+}

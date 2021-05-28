@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useAuthState} from 'react-firebase-hooks/auth'
-import {auth, db} from '../firebase'
+import {auth} from '../firebase'
 import moment from 'moment'
 
 
@@ -12,6 +12,7 @@ function Message({user, message}) {
     const TypeOfMessage = user === userLoggedIn.email ? Sender : Reciever;
 
 
+ 
     return (
         <Container>
             <TypeOfMessage>
@@ -47,6 +48,7 @@ const Sender = styled(MessageElement)`
 const Reciever = styled(MessageElement)`
     background-color: whitesmoke;
     text-align: left;
+    
 `;
 
 const Timestamp = styled.span`
