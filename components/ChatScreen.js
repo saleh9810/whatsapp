@@ -4,7 +4,7 @@ import {db, auth} from '../firebase'
 import {useRouter} from 'next/router'
 import {useCollection} from 'react-firebase-hooks/firestore'
 import { Avatar, Button} from '@material-ui/core';
-import { InsertEmoticon, Mic} from '@material-ui/icons';
+import { InsertEmoticon, ArrowForward} from '@material-ui/icons';
 import Message from './Message'
 import { useRef, useState } from 'react'
 import firebase from 'firebase'
@@ -88,6 +88,9 @@ function ChatScreen({chat, messages}) {
       }
     return (
         <Container>
+                <BackButton>
+                         <Button onClick={handleClick}> &rarr; Back Home</Button>
+                 </BackButton>
             <Header>
                 {recipient ? (
                     <Avatar className="avatar" src={recipient?.photoURL} />
@@ -118,8 +121,7 @@ function ChatScreen({chat, messages}) {
             <InputContainer>
                 <InsertEmoticon />
                 <Input value={input} onChange={e => setInput(e.target.value)} />
-                <button hidden disabled={!input} type="submit" onClick={sendMessage}>Send Message</button>
-                <Mic />
+                <Button  type="submit" onClick={sendMessage}><ArrowForward/></Button>
             </InputContainer>
         </Container>
     )
@@ -217,6 +219,7 @@ const InputContainer = styled.form`
     align-items: center;
     padding: 10px;
     position: sticky;
+    width: 100%;
     bottom: 0;
     background-color: #fff;
     z-index: 100;
