@@ -88,9 +88,6 @@ function ChatScreen({chat, messages}) {
       }
     return (
         <Container>
-                <BackButton>
-                         <Button onClick={handleClick}> &rarr; Back Home</Button>
-                 </BackButton>
             <Header>
                 {recipient ? (
                     <Avatar className="avatar" src={recipient?.photoURL} />
@@ -116,7 +113,7 @@ function ChatScreen({chat, messages}) {
 
             <MessageContainer>
             {showMessages()}
-                <EndOfMessage ref={endOfMessagesRef} />
+            <EndOfMessage ref={endOfMessagesRef} />
             </MessageContainer>
             <InputContainer>
                 <InsertEmoticon />
