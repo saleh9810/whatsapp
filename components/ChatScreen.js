@@ -45,7 +45,9 @@ function ChatScreen({chat, messages}) {
                         ...message.data(),
                         timestamp: message.data().timestamp?.toDate().getTime(),
                     }}
-                />        
+                />     
+                
+                
          ));
                 
         }else {
@@ -57,6 +59,7 @@ function ChatScreen({chat, messages}) {
                 />       
             ))
         }
+
     }
 
     const sendMessage = (e) => {
@@ -172,7 +175,7 @@ const MessageContainer = styled.div`
 
     padding: 30px;
     background-color: #e5ded8;
-    min-height: 90vh;
+    height: 95vh;
 `;
 
 const EndOfMessage = styled.div`
