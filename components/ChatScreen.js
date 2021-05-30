@@ -123,7 +123,7 @@ function ChatScreen({chat, messages}) {
             </MessageContainer>
             <InputContainer>
                 <InsertEmoticon />
-                <Input value={input} onChange={e => setInput(e.target.value)} />
+                <Input autoFocus value={input} onChange={e => setInput(e.target.value)} />
                 <Button  type="submit" onClick={sendMessage}><ArrowForward/></Button>
             </InputContainer>
         </Container>
